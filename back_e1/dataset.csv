@@ -1,0 +1,3 @@
+text,label,source
+"This is only a placeholder human sample. Replace this row with a genuine human-written passage before training.",HUMAN,Human
+"This is only a placeholder AI sample. Replace this row with a genuine AI-generated passage before training.",AI,ExampleAI

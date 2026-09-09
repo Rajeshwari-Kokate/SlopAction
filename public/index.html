@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#F9F9DF" />
+  <meta name="description" content="SlopAction — a clean AI/Human text analysis interface." />
+  <title>SlopAction — AI Text Detector</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="ambient ambient-three" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a href="#top" class="brand" aria-label="SlopAction home">
+      <span class="brand-mark">S</span>
+      <span class="brand-name">SlopAction</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="#detector">Detector</a>
+      <a href="#how">How it works</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <div class="nav-tag">
+      <span class="status-dot"></span>
+      live
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero section-shell">
+      <div class="hero-copy reveal">
+        <div class="eyebrow-row">
+          <span class="pill pill-crimson">AI TEXT DETECTOR</span>
+          <span class="pill pill-blue">SLOPACTION / BETA</span>
+        </div>
+
+        <h1>
+          Find the <span class="word-accent">slop.</span><br />
+          Keep the <span class="word-outline">voice.</span>
+        </h1>
+
+        <p class="hero-subcopy">
+          Paste writing, run an analysis, and get a clear AI-vs-human estimate in seconds.
+        </p>
+
+        <div class="hero-actions">
+          <a class="primary-cta magnetic" href="#detector">
+            <span>Analyze text</span>
+            <span class="cta-arrow">↘</span>
+          </a>
+          <span class="microcopy">diffrenciate between ai and human text.</span>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal" aria-hidden="true">
+        <div class="orbit orbit-large"></div>
+        <div class="orbit orbit-small"></div>
+
+        <div class="floating-card card-ai">
+          <span class="mini-tag">AI SIGNAL</span>
+          <strong>82%</strong>
+          <span>likely AI</span>
+        </div>
+
+        <div class="floating-card card-human">
+          <span class="mini-tag">HUMAN</span>
+          <strong>18%</strong>
+          <span>natural variance</span>
+        </div>
+
+        <div class="hero-core">
+          <div class="core-ring"></div>
+          <div class="core-mark">S</div>
+        </div>
+
+        <span class="orbit-label label-one">REPETITION</span>
+        <span class="orbit-label label-two">RHYTHM</span>
+        <span class="orbit-label label-three">SPECIFICITY</span>
+      </div>
+    </section>
+
+    <section class="ticker-wrap" aria-label="Analysis signals">
+      <div class="ticker">
+        <span>AI PATTERN MATCH</span><i>✦</i>
+        <span>SENTENCE RHYTHM</span><i>✦</i>
+        <span>REPETITION</span><i>✦</i>
+        <span>SPECIFICITY</span><i>✦</i>
+        <span>GENERIC LANGUAGE</span><i>✦</i>
+        <span>AI PATTERN MATCH</span><i>✦</i>
+        <span>SENTENCE RHYTHM</span><i>✦</i>
+        <span>REPETITION</span><i>✦</i>
+        <span>SPECIFICITY</span><i>✦</i>
+        <span>GENERIC LANGUAGE</span><i>✦</i>
+      </div>
+    </section>
+
+    <section class="detector-section section-shell" id="detector">
+      <div class="section-heading reveal">
+        <div>
+          <span class="section-index">01 / DETECTOR</span>
+          <h2>Paste it. Scan it. Read the signal.</h2>
+        </div>
+        <p>
+          The current button uses a calculation so the interface works immediately.
+        </p>
+      </div>
+
+      <div class="analyzer reveal" id="analyzerCard">
+        <div class="input-panel">
+          <div class="panel-topline">
+            <div>
+              <span class="panel-kicker">INPUT</span>
+              <h3>Your text</h3>
+            </div>
+
+            <button class="icon-text-button" id="clearButton" type="button" aria-label="Clear text">
+              Clear
+            </button>
+          </div>
+
+          <div class="textarea-shell" id="textareaShell">
+            <textarea
+              id="textInput"
+              placeholder="Paste an essay, article, caption, email or any text here…"
+              spellcheck="true"
+              maxlength="12000"
+              aria-label="Text to analyze"
+            ></textarea>
+
+            <div class="input-footer">
+              <div class="counter-row">
+                <span id="wordCount">0 words</span>
+                <span class="dot-separator"></span>
+                <span id="charCount">0 characters</span>
+              </div>
+              <span class="limit-label">12,000 max</span>
+            </div>
+          </div>
+
+          <div class="sample-row">
+            <span class="sample-label">TRY A SAMPLE</span>
+            <button class="sample-chip" data-sample="human" type="button">Human-ish</button>
+            <button class="sample-chip" data-sample="ai" type="button">AI-ish</button>
+          </div>
+
+          <div class="analyze-row">
+            <div class="quality-hint" id="qualityHint">
+              <span class="hint-dot"></span>
+              <span>Use 50+ words for a stronger signal.</span>
+            </div>
+
+            <button class="analyze-button magnetic" id="analyzeButton" type="button">
+              <span class="button-copy">Analyze</span>
+              <span class="button-icon">→</span>
+              <span class="button-spinner" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="result-panel" id="resultPanel">
+          <div class="scan-grid" aria-hidden="true"></div>
+          <div class="scan-line" aria-hidden="true"></div>
+
+          <div class="empty-result" id="emptyResult">
+            <div class="empty-icon-wrap">
+              <div class="empty-pulse"></div>
+              <span>S</span>
+            </div>
+            <span class="panel-kicker">OUTPUT</span>
+            <h3>Analysis will appear here.</h3>
+            <p>AI probability, human probability and the strongest writing signals will show on this side.</p>
+
+            <div class="empty-tags">
+              <span>AI / HUMAN</span>
+              <span>CONFIDENCE</span>
+              <span>SIGNALS</span>
+            </div>
+          </div>
+
+          <div class="result-content is-hidden" id="resultContent">
+            <div class="result-topline">
+              <div>
+                <span class="panel-kicker">RESULT</span>
+                <h3 id="verdictTitle">Likely AI-generated</h3>
+              </div>
+              <span class="confidence-tag" id="confidenceTag">Medium confidence</span>
+            </div>
+
+            <div class="score-stage">
+              <div class="score-ring" id="scoreRing" style="--score: 0">
+                <div class="score-ring-inner">
+                  <span class="score-number"><span id="aiScore">0</span><small>%</small></span>
+                  <span class="score-label">AI</span>
+                </div>
+              </div>
+
+              <div class="score-copy">
+                <span class="mini-tag">PATTERN MATCH</span>
+                <h4 id="scoreHeadline">Waiting for text.</h4>
+                <p id="scoreDescription">Run the detector to populate this result.</p>
+              </div>
+            </div>
+
+            <div class="probability-stack">
+              <div class="probability-item">
+                <div class="probability-label">
+                  <span><i class="prob-dot ai-dot"></i>AI</span>
+                  <strong id="aiBarLabel">0%</strong>
+                </div>
+                <div class="prob-track"><span class="prob-fill ai-fill" id="aiBar"></span></div>
+              </div>
+
+              <div class="probability-item">
+                <div class="probability-label">
+                  <span><i class="prob-dot human-dot"></i>Human</span>
+                  <strong id="humanBarLabel">0%</strong>
+                </div>
+                <div class="prob-track"><span class="prob-fill human-fill" id="humanBar"></span></div>
+              </div>
+            </div>
+
+            <div class="signal-grid">
+              <article class="signal-card">
+                <span>GENERIC</span>
+                <strong id="genericScore">0%</strong>
+              </article>
+              <article class="signal-card">
+                <span>REPETITION</span>
+                <strong id="repetitionScore">0%</strong>
+              </article>
+              <article class="signal-card">
+                <span>UNIFORMITY</span>
+                <strong id="uniformityScore">0%</strong>
+              </article>
+              <article class="signal-card">
+                <span>SPECIFICITY</span>
+                <strong id="specificityScore">0%</strong>
+              </article>
+            </div>
+
+            <div class="result-note">
+              <span class="note-tag">NOTE</span>
+              <p id="resultNote">AI detection is probabilistic, not proof of authorship.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-section section-shell" id="how">
+      <div class="section-heading reveal">
+        <div>
+          <span class="section-index">02 / FLOW</span>
+          <h2>Three steps. One clean loop.</h2>
+        </div>
+        <p>The frontend is intentionally separated from the detector so you can swap providers without rebuilding the UI.</p>
+      </div>
+
+      <div class="steps-grid">
+        <article class="step-card reveal">
+          <span class="step-number">01</span>
+          <div class="step-icon">Aa</div>
+          <span class="pill pill-peach">INPUT</span>
+          <h3>Paste text</h3>
+          <p>The browser collects the content and sends only the text required for analysis.</p>
+        </article>
+
+        <article class="step-card reveal">
+          <span class="step-number">02</span>
+          <div class="step-icon">↗</div>
+          <span class="pill pill-blue">Analyze</span>
+          <h3>Send to backend</h3>
+          <p>Your server checks the calculation stages and passes the text to the detector provider.</p>
+        </article>
+
+        <article class="step-card reveal">
+          <span class="step-number">03</span>
+          <div class="step-icon">%</div>
+          <span class="pill pill-crimson">RESULT</span>
+          <h3>Return the score</h3>
+          <p>The response is turned into a simple AI/Human result, confidence badge and signals.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="about-section section-shell" id="about">
+      <div class="about-card reveal">
+        <div>
+          <span class="section-index">03 / SLOPACTION</span>
+          <h2>Detection without the clutter.</h2>
+        </div>
+
+        <div class="about-copy">
+          <p>
+            This version is built as the visual shell for your code-powered detector. 
+            The detection logic runs through backend
+          </p>
+          <div class="about-tags">
+            <span>FRONTEND READY</span>
+            <span>RESPONSIVE</span>
+            <span>ANIMATED</span>
+            <span>CODE LOGIC CONNECTED</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer section-shell">
+    <div class="footer-brand">
+      <span class="brand-mark small">S</span>
+      <span>SlopAction</span>
+    </div>
+    <p>AI detection is an estimate. It should not be treated as proof of authorship.</p>
+    <span class="footer-code">SLOP / 001</span>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="toast-dot"></span>
+    <span id="toastText">Add a little more text first.</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
