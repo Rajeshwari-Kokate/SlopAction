@@ -1,6 +1,9 @@
 const express = require("express");
 const path = require("path");
 require("dotenv").config();
+const {
+    adjustDetectorScore
+} = require("./score-adjuster");
 
 const app = express();
 
@@ -131,13 +134,12 @@ app.post("/api/analyze", async (req, res) => {
         }
 
 
-        const ai =
-            Math.round(
-                data.score * 100
-            );
-
-        const human =
-            100 - ai;
+        const {
+            ai,
+            human
+        } = adjustDetectorScore(
+            data.score
+        );
 
 
         return res.json({
@@ -146,7 +148,7 @@ app.post("/api/analyze", async (req, res) => {
 
             human: human,
 
-            score: data.score,
+            score: ai / 100,
 
             sentenceScores:
                 data.sentence_scores || []
